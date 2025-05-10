@@ -42,4 +42,32 @@ public class RelatorioController : ControllerBase
         var resultado = await _service.ObterTotaisPorArboviroseAsync();
         return Ok(resultado);
     }
+
+    [HttpGet("totais-por-municipio")]
+    public async Task<IActionResult> TotaisPorMunicipio()
+    {
+        var totais = await _service.ObterTotaisPorMunicipioAsync();
+        return Ok(totais);
+    }
+
+    [HttpGet("por-municipios")]
+    public async Task<IActionResult> PorMunicipios([FromQuery] string[] nomes)
+    {
+        var relatorios = await _service.ObterPorMunicipiosAsync(nomes);
+        return Ok(relatorios);
+    }
+
+    [HttpGet("solicitantes")]
+    public async Task<IActionResult> ObterSolicitantes()
+    {
+        var solicitantes = await _service.ObterSolicitantesAsync();
+        return Ok(solicitantes);
+    }
+
+    [HttpGet("filtrar")]
+    public async Task<IActionResult> Filtrar([FromQuery] int codigoIbge, [FromQuery] int semanaInicio, [FromQuery] int semanaFim, [FromQuery] string arbovirose)
+    {
+        var resultado = await _service.FiltrarRelatoriosAsync(codigoIbge, semanaInicio, semanaFim, arbovirose);
+        return Ok(resultado);
+    }
 }
