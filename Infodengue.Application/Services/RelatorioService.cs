@@ -78,5 +78,41 @@ namespace Infodengue.Application.Services
             return agrupado;
         }
 
+        public async Task<IEnumerable<object>> ObterTotaisPorMunicipioAsync()
+        {
+            var relatorios = await _relatorioRepo.ListarTodosAsync();
+
+            return relatorios
+                .GroupBy(r => r.Municipio)
+                .Select(g => new
+                {
+                    Municipio = g.Key,
+                    Total = g.Count()
+                });
+        }
+
+        public async Task<IEnumerable<Relatorio>> ObterPorMunicipiosAsync(List<string> nomes)
+        {
+            var relatorios = await _relatorioRepo.ListarTodosAsync();
+            return relatorios.Where(r => nomes.Contains(r.Municipio));
+        }
+
+        public async Task<IEnumerable<Solicitante>> ObterSolicitantesAsync()
+        {
+            return await _solicitanteRepo.ObterTodosAsync();
+        }
+
+        public async Task<IEnumerable<Relatorio>> FiltrarRelatoriosAsync(int codigoIbge, int semanaInicio, int semanaFim, string arbovirose)
+        {
+            var relatorios = await _relatorioRepo.ListarTodosAsync();
+
+            return relatorios
+                .Where(r =>
+                    r.CodigoIbge == codigoIbge &&
+                    r.SemanaInicio >= semanaInicio &&
+                    r.SemanaFim <= semanaFim &&
+                    r.Arbovirose.Equals(arbovirose, StringComparison.OrdinalIgnoreCase));
+        }
+
     }
 }
