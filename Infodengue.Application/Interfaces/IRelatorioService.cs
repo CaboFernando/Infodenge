@@ -10,7 +10,7 @@ namespace Infodengue.Application.Interfaces
         Task<IEnumerable<RelatorioDto>> ListarPorCodigoIbgeAsync(string codigoIbge);
         Task<Dictionary<string, int>> ObterTotaisPorArboviroseAsync();
         Task<IEnumerable<object>> ObterTotaisPorMunicipioAsync();
-        Task<IEnumerable<Relatorio>> ObterPorMunicipiosAsync(List<string> nomes);
+        Task<IEnumerable<Relatorio>> ObterPorMunicipiosAsync(string[] nomes);
         Task<IEnumerable<Solicitante>> ObterSolicitantesAsync();
         Task<IEnumerable<Relatorio>> FiltrarRelatoriosAsync(int codigoIbge, int semanaInicio, int semanaFim, string arbovirose);
 

@@ -2,6 +2,7 @@
 
 public class Relatorio
 {
+    public int Id { get; set; }
     public DateTime DataSolicitacao { get; set; }
     public string Arbovirose { get; set; }
     public Solicitante Solicitante { get; set; }

@@ -91,7 +91,7 @@ namespace Infodengue.Application.Services
                 });
         }
 
-        public async Task<IEnumerable<Relatorio>> ObterPorMunicipiosAsync(List<string> nomes)
+        public async Task<IEnumerable<Relatorio>> ObterPorMunicipiosAsync(string[] nomes)
         {
             var relatorios = await _relatorioRepo.ListarTodosAsync();
             return relatorios.Where(r => nomes.Contains(r.Municipio));
