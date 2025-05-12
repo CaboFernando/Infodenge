@@ -1,5 +1,6 @@
 ﻿using Infodengue.Application.DTOs;
 using Infodengue.Application.Interfaces;
+using Infodengue.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Infodengue.API.Controllers;
@@ -14,6 +15,26 @@ public class RelatorioController : ControllerBase
     {
         _service = service;
     }
+
+    [HttpGet("dados")]
+    public async Task<IActionResult> ObterDados([FromServices] InfodengueApiService apiService, [FromQuery] string arbovirose, [FromQuery] int codigoIbge, [FromQuery] string inicio, [FromQuery] string fim)
+    {
+        var dados = await apiService.ObterDadosAsync(arbovirose, codigoIbge, inicio, fim);
+        return Ok(dados);
+    }
+
+    [HttpGet("municipios")]
+    public IActionResult ListarMunicipios()
+    {
+        var municipios = new List<object>
+        {
+            new { Codigo = 3304557, Nome = "Rio de Janeiro" },
+            new { Codigo = 3550308, Nome = "São Paulo" },
+            // outros...
+        };
+        return Ok(municipios);
+    }
+
 
     [HttpPost]
     public async Task<IActionResult> Solicitar([FromBody] RelatorioDto dto)

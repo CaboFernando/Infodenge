@@ -23,6 +23,9 @@ builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
 builder.Services.AddScoped<ISolicitanteService, SolicitanteService>();
 builder.Services.AddScoped<IRelatorioService, RelatorioService>();
 
+builder.Services.AddHttpClient<InfodengueApiService>();
+
+
 
 var app = builder.Build();
 
